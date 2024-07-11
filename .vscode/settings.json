@@ -5,7 +5,7 @@
         "pcap.h": "c",
         "tnet_core.h": "c"
     },
-    "cmake.generator": "MinGW Makefiles",
+    //"cmake.generator": "MinGW Makefiles",
     "cmake.cpackPath": "E:\\CMake\\bin\\cmake.exe",
     "cmake.ctestPath": "E:\\CMake\\bin\\ctest.exe",
 }
