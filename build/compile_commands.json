@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Users/Dan/Desktop/tcp/build",
-  "command": "E:\\mingw64\\bin\\gcc.exe  @CMakeFiles/tcp.dir/includes_C.rsp -g -o CMakeFiles\\tcp.dir\\src\\app.c.obj -c C:\\Users\\Dan\\Desktop\\tcp\\src\\app.c",
-  "file": "C:/Users/Dan/Desktop/tcp/src/app.c",
-  "output": "CMakeFiles/tcp.dir/src/app.c.obj"
-}
-]

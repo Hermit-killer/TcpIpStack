@@ -1,3 +1,0 @@
-E:\CMake\bin\cmake.exe -E rm -f CMakeFiles\tcp.dir/objects.a
-E:\mingw64\bin\ar.exe qc CMakeFiles\tcp.dir/objects.a @CMakeFiles\tcp.dir\objects1.rsp
-E:\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\tcp.dir/objects.a -Wl,--no-whole-archive -o tcp.exe -Wl,--out-implib,libtcp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\tcp.dir\linkLibs.rsp

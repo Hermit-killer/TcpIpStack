@@ -1,3 +1,0 @@
-E:\CMake\bin\cmake.exe -E rm -f CMakeFiles\TcpIpStack.dir/objects.a
-E:\mingw64\bin\ar.exe qc CMakeFiles\TcpIpStack.dir/objects.a @CMakeFiles\TcpIpStack.dir\objects1.rsp
-E:\CMake\bin\gcc.exe -Wl,--whole-archive CMakeFiles\TcpIpStack.dir/objects.a -Wl,--no-whole-archive -o TcpIpStack.exe -Wl,--out-implib,libTcpIpStack.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TcpIpStack.dir\linkLibs.rsp
