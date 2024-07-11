@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "pcap_device.h": "c",
+        "stdint.h": "c",
+        "pcap.h": "c",
+        "tnet_core.h": "c"
+    },
+    "cmake.generator": "MinGW Makefiles",
+    "cmake.cpackPath": "E:\\CMake\\bin\\cmake.exe",
+    "cmake.ctestPath": "E:\\CMake\\bin\\ctest.exe",
+}
