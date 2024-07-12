@@ -5,5 +5,7 @@ set(CMAKE_CXX_COMPILER "E:\\mingw64\\bin\\g++.exe")
 set(CMAKE_GENERATOR "MinGW Makefiles")
 
 include_directories(inc tnet_core "E:/WpdPack/Include")
+aux_source_directory(tnet_app SRC_LIST1)
+aux_source_directory(tnet_core SRC_LIST2)
 
-add_executable(tcp  "C:/Users/Dan/Desktop/tcp/src/app.c")
+add_executable(tcp  "C:/Users/Dan/Desktop/tcp/src/app.c" ${SRC_LIST1} ${SRC_LIST2})
