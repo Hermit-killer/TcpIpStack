@@ -3,7 +3,11 @@
         "pcap_device.h": "c",
         "stdint.h": "c",
         "pcap.h": "c",
-        "tnet_core.h": "c"
+        "tnet_core.h": "c",
+        "enc28j60_device.h": "c",
+        "winsock.h": "c",
+        "tchar.h": "c",
+        "time.h": "c"
     },
     //"cmake.generator": "MinGW Makefiles",
     "cmake.cpackPath": "E:\\CMake\\bin\\cmake.exe",

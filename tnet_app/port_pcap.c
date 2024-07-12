@@ -17,7 +17,7 @@ tnet_err_t tnet_driver_open(uint8_t * mac_addr){
 }
 
 tnet_err_t tnet_driver_xfer(tnet_packet_t * packet){
-    return tnet_device_xfer(pcap,packet->data,packet->size);
+    return pcap_device_xfer(pcap,packet->data,packet->size);
 }
 
 tnet_err_t tnet_driver_read(tnet_packet_t ** packet){
