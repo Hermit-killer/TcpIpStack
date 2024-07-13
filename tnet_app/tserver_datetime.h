@@ -23,22 +23,11 @@
  * ..... 更多功能开发中...........
  * 如果你有兴趣的话，请扫仓库中的二维码，或者点击以上面的链接可找到该课程。
  */
-#include <stdio.h>
+#ifndef XSERVER_DATETIME_H
+#define XSERVER_DATETIME_H
+
 #include "tnet_core.h"
-#include "tserver_datetime.h"
-#include "tserver_http.h"
 
-int main (void) {
-    xnet_init();
+xnet_err_t xserver_datetime_create(uint16_t port);
 
-    xserver_datetime_create(13);
-    xserver_http_create(80);
-
-    printf("xnet running\n");
-    while (1) {
-        xserver_http_run();
-        xnet_poll();
-    }
-
-    return 0;
-}
+#endif // XSERVER_DATETIME_H
