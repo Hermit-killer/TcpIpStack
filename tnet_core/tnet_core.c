@@ -1,8 +1,12 @@
 #include "tnet_core.h"
+#include <string.h>
 #define min(a,b) ((a)<(b)? (a) : (b))
+#define swap_order16(v) ((((v)&0xff)<<8) | (((v)>>8) & 0xff))
 static uint8_t netif_mac[TNET_MAC_ADDR_SIZE];
 
 static tnet_packet_t tx_packet,rx_packet;
+
+static tarp_entry_t arp_entry;
 
 tnet_packet_t * tnet_alloc_for_xfer(uint16_t data_size){
     tx_packet.data = tx_packet.payload + TNET_CFG_PACKET_MAX_SIZE - data_size; 
@@ -51,10 +55,13 @@ static tnet_err_t ethernet_out_to(tnet_protocal_t protocal,
 
 static void ethernet_in(tnet_packet_t * packet){
     tether_hdr_t * ether_hdr; 
+    uint16_t protocal;
     if(packet->size<=sizeof(tether_hdr_t)){
         return;
     }
-    switch(ether_hdr->protocal){
+    ether_hdr = (tether_hdr_t*)packet->data;
+    protocal = swap_order16(ether_hdr->protocal);
+    switch(protocal){
         case TNET_PROTOCAL_ARP:
             break;
         case TNET_PROTOCAL_IP:
@@ -75,4 +82,8 @@ void tnet_init(void){
 
 void tnet_poll(void){
     ethernet_poll();
+}
+
+void tarp_init(void){
+    arp_entry.state = TARP_ENTRY_FREE;
 }

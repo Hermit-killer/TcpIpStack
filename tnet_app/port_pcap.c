@@ -4,7 +4,7 @@
 #include "string.h"
 
 static pcap_t * pcap;
-const char * ip_addr = "192.168.111.129";
+const char * ip_addr = "192.168.111.1"; //这里的ip地址是本地的IP地址
 const char my_mac_addr[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77};
 
 tnet_err_t tnet_driver_open(uint8_t * mac_addr){

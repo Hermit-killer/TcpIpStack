@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "E:/WpdPack/Include/**"
+                "${workspaceFolder}/lib/WpdPack/Include/**"
             ],
             "defines": [
                 "_DEBUG",

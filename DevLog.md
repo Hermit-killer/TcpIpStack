@@ -28,6 +28,12 @@
 
 `project(NAME)` 不要放在中间，要放在最前面。
 
+系统默认库放在目录 `C:\Windows\System32` 下，如果要调用，则使用 `target_link_libraries` 或者 `link_libraries` 将其添加进来。
+
+使用子目录管理的核心是 `add_subdirectory`。
+
+使用 `add_definitions(-DWIN32)` 来添加宏 `WIN32` 。
+
 ### 插件使用
 `Vim`, `vscode-icons`
 
@@ -54,4 +60,10 @@
 `b`: **上个** 单词 **首**
 
 > 注意如果光标处于一个单词的内部，那么 `b` 就是本单词的词首， `e`就是本单词的词尾。
+
+#### 以页的方式移动
+
+`gg`: 移动到文件头部
+
+`G`: 移动到文件尾部
 
