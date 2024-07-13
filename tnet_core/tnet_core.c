@@ -2,7 +2,7 @@
 #include <string.h>
 #define min(a,b) ((a)<(b)? (a) : (b))
 #define swap_order16(v) ((((v)&0xff)<<8) | (((v)>>8) & 0xff))
-#define tipaddr_is_equal_buf(addr,buf)  ((memcmp((addr)->array,(buf),TNET_IPV4_ADDR_SIZE)) == 0)
+#define tipaddr_is_equal_buf(addr,buf)  (memcmp((addr)->array, (buf), TNET_IPV4_ADDR_SIZE) == 0)
 
 static const tipaddr_t netif_ipaddr = TNET_CFG_NETIF_IP;
 static const uint8_t ehter_broadcast[] = {0xff,0xff,0xff,0xff,0xff,0xff};
@@ -19,7 +19,7 @@ tnet_packet_t * tnet_alloc_for_xfer(uint16_t data_size){
     return &tx_packet;
 }
 
-tnet_packet_t * tnet_alloc_for_recv(uint16_t data_size){
+tnet_packet_t * tnet_alloc_for_read(uint16_t data_size){
     rx_packet.data = rx_packet.payload;
     rx_packet.size = data_size;
     return &rx_packet;
@@ -54,7 +54,7 @@ static tnet_err_t ethernet_out_to(tnet_protocal_t protocal,
     ether_hdr = (tether_hdr_t *) packet->data;
     memcpy(ether_hdr->dest,mac_addr,TNET_MAC_ADDR_SIZE);
     memcpy(ether_hdr->src,netif_mac,TNET_MAC_ADDR_SIZE);
-    ether_hdr->protocal = protocal;
+    ether_hdr->protocal = swap_order16(protocal);
     return tnet_driver_xfer(packet);
 }
 
@@ -68,10 +68,11 @@ static void ethernet_in(tnet_packet_t * packet){
     protocal = swap_order16(ether_hdr->protocal);
     switch(protocal){
         case TNET_PROTOCAL_ARP:
-            remove_header(packet,sizeof(tnet_packet_t));
+            remove_header(packet,sizeof(tether_hdr_t));
             tarp_in(packet);
             break;
         case TNET_PROTOCAL_IP:
+            remove_header(packet,sizeof(tether_hdr_t));
             break;
     }
 }
@@ -98,11 +99,11 @@ void tarp_init(void){
 int tarp_make_request(const tipaddr_t * ipaddr){
     tnet_packet_t * packet = tnet_alloc_for_xfer(sizeof(tarp_packet_t));
     tarp_packet_t * arp_packet = (tarp_packet_t *) packet->data;
-    arp_packet->hw_type = TARP_HW_ETHER;
+    arp_packet->hw_type = swap_order16(TARP_HW_ETHER);
     arp_packet->pro_type = swap_order16(TNET_PROTOCAL_IP);
     arp_packet->hw_len = TNET_MAC_ADDR_SIZE;
     arp_packet->pro_len = TNET_IPV4_ADDR_SIZE;
-    arp_packet->opcode = TARP_REQUEST;
+    arp_packet->opcode = swap_order16(TARP_REQUEST);
     memcpy(arp_packet->src_mac,netif_mac,TNET_MAC_ADDR_SIZE);
     memcpy(arp_packet->src_ip,netif_ipaddr.array,TNET_IPV4_ADDR_SIZE);
     memset(arp_packet->dest_mac,0,TNET_MAC_ADDR_SIZE);
@@ -145,11 +146,11 @@ tnet_err_t tarp_make_response(tarp_packet_t*arp_packet){
     tnet_packet_t * packet = tnet_alloc_for_xfer(sizeof(tarp_packet_t));
     tarp_packet_t * response_packet = (tarp_packet_t *) packet->data;
 
-    response_packet->hw_type = TARP_HW_ETHER;
+    response_packet->hw_type = swap_order16(TARP_HW_ETHER);
     response_packet->pro_type = swap_order16(TNET_PROTOCAL_IP);
     response_packet->hw_len = TNET_MAC_ADDR_SIZE;
     response_packet->pro_len = TNET_IPV4_ADDR_SIZE;
-    response_packet->opcode = TARP_REPLY;
+    response_packet->opcode = swap_order16(TARP_REPLY);
     memcpy(response_packet->src_mac,netif_mac,TNET_MAC_ADDR_SIZE);
     memcpy(response_packet->src_ip,netif_ipaddr.array,TNET_IPV4_ADDR_SIZE);
     memcpy(response_packet->dest_mac, arp_packet->src_mac,TNET_MAC_ADDR_SIZE);

@@ -22,7 +22,7 @@ tnet_err_t tnet_driver_xfer(tnet_packet_t * packet){
 
 tnet_err_t tnet_driver_read(tnet_packet_t ** packet){
     uint16_t size;
-    tnet_packet_t * rx_packet = tnet_alloc_for_recv(TNET_CFG_PACKET_MAX_SIZE);
+    tnet_packet_t * rx_packet = tnet_alloc_for_read(TNET_CFG_PACKET_MAX_SIZE);
     size = pcap_device_read(pcap,rx_packet->data,TNET_CFG_PACKET_MAX_SIZE);
     if(size){
         rx_packet->size = size;
