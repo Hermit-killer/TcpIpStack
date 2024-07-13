@@ -28,7 +28,7 @@
         },
         {
             "label": "Build",
-            "dependsOn":["cmake"]
+            "dependsOn":["make"]
         }
     ]
 }
